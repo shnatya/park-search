@@ -1,0 +1,2 @@
+class FacilityCopy < ApplicationRecord
+end

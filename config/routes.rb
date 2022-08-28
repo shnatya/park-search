@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :facility_copies
   resources :activity_facilities
   resources :activities
   resources :facilities

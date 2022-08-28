@@ -7,9 +7,9 @@
 #   Character.create(name: "Luke", movie: movies.first)
 require 'json' 
 
-puts "Seeding facilities..."
+puts "Seeding FacilityCopy..."
 Facility.destroy_all
-facility_hash = []
+facility_copy = []
 limit = 1000
 offset = 0
 max_records = 1000
@@ -20,7 +20,7 @@ response = RestClient.get "https://ridb.recreation.gov/api/v1/facilities?limit=#
   # the response will come back as a JSON-formatted string.
   # using JSON.parse to convert this string to a Ruby hash:
   tmp_hash = JSON.parse(response)
-  facility_hash += tmp_hash["RECDATA"]
+  facility_copy += tmp_hash["RECDATA"]
 
   if (tmp_hash["RECDATA"].size < limit) || (cur_records >= max_records) 
       break
@@ -31,19 +31,19 @@ response = RestClient.get "https://ridb.recreation.gov/api/v1/facilities?limit=#
 
 end
 
-facility_hash.each do |facility|
-    Facility.create(
+facility_copy.each do |facility|
+    FacilityCopy.create(
       name: facility["FacilityName"],
       description: facility["FacilityDescription"],
       facility_code: facility["FacilityID"]
   )
 end
 
-puts "Done seeding facilities!"
+puts "Done seeding FacilityCopy!"
 
 
 
-puts "Seeding activities..."
+puts "Seeding Activity..."
 Activity.destroy_all
 response = RestClient.get "https://ridb.recreation.gov/api/v1/activities?", headers={apikey: '39051e7d-45e8-4b59-b80f-4f6511c2fbe6'}
 activity_hash = JSON.parse(response)
@@ -54,39 +54,39 @@ activity_hash["RECDATA"].each do |activity|
     activity_code: activity["ActivityID"]
 )
 end
-puts "Done seeding activities!"
+puts "Done seeding Activity!"
 
-puts "Seeding activity_facility..."
-
-
-class String
-  def is_integer?
-    self.to_i.to_s == self
-  end
-end
+puts "Seeding ActivityFacility and Facility..."
+ActivityFacility.destroy_all
+Facility.destroy_all
 
 activity_facility = JSON.parse(File.read('db/ribd/EntityActivities_API_v1.json'))
 
 activity_facility["RECDATA"].each do |entry|
-  if !entry["EntityID"].is_integer?
-    continue
-  end
-
-  tmp = entry["EntityID"]
-  puts "#{tmp}"
-  facility = Facility.find_by_facility_code(tmp)
-  if facility 
-    primary_facility_id = facility[:id]
-
-    activity = Activity.find_by_activity_code(entry["ActivityID"])
-    primary_activity_id = activity[:id]
-
-    ActivityFacility.create(
-      facility_id: primary_facility_id,
-      activity_id: primary_activity_id
+  activity = Activity.find_by_activity_code(entry["ActivityID"])
+  primary_activity_id = activity.id
+ 
+  facility_copy = FacilityCopy.find_by_facility_code(entry["EntityID"])
+  if facility_copy
+    #need to check if this facility code is already in the table, because activity_facility
+    #file has several records for the same facility_code with different activities
+    if Facility.exists?(:facility_code => entry["EntityID"])
+      facility = Facility.find_by_facility_code(entry["EntityID"])
+      primary_facility_id = facility.id
+    else
+      facility = Facility.create(
+        name: facility_copy.name,
+        description: facility_copy.description,
+        facility_code: facility_copy.facility_code
     )
+      primary_facility_id = facility.id
+    end
+
+  ActivityFacility.create(
+    facility_id: primary_facility_id,
+    activity_id: primary_activity_id
+  )
   end
 end
-
-puts "Done seeding activity_facility!"
-#some facilities are useless. they dont have activities assighned.
+#FacilityCopy.destroy_all
+puts "Done seeding ActivityFacility and Facility!"

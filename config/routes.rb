@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :trips
-  resources :users
+  
   resources :facility_copies
   resources :activity_facilities
   resources :activities
@@ -9,6 +9,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
+
+  get '/me', to: 'users#show'
+  post '/signup', to: 'users#create'
 
   get '/hello', to: 'application#hello_world'
 

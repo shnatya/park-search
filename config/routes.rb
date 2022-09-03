@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :trips
+  resources :users
   resources :facility_copies
   resources :activity_facilities
   resources :activities

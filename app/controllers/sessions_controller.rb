@@ -1,4 +1,4 @@
-class SessionsController::ApplicationController
+class SessionsController < ApplicationController
     #POST "/login"
     def create
         user = User.find_by_username(params[:username])
@@ -13,7 +13,6 @@ class SessionsController::ApplicationController
     #DELETE "/logout"
     def destroy
         session.delete :user_id
-        head :no_content
     end
 
 end

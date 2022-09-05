@@ -2,11 +2,13 @@ import './App.css';
 
 import { useState, useEffect } from "react";
 import { Route, Routes, useNavigate} from 'react-router-dom'
-import NewComponent from './NewComponent';
-import NewComponentCopy from './NewComponentCopy';
+import Login from './Log/Login';
+import Intro from './Intro';
 
 function App() {
   const [count, setCount] = useState(0);
+  const [user, setUser] = useState(null)
+  
 
   useEffect(() => {
     fetch("/hello")
@@ -14,13 +16,16 @@ function App() {
       .then((data) => setCount(data.count));
   }, []);
 
+  function onLogin(user) {
+    setUser(user)
+  }
   return (
     <div className="App">
       
       <Routes>
-          <Route path="/testing" element={<NewComponent count={count}/>} />
-          <Route path="/" element={<NewComponentCopy count={count}/>} />
-          <Route path="*" element={<NewComponentCopy count={count}/>} />
+          <Route path="/login" element={<Login onLogin={onLogin}/>} />
+          <Route path="/" element={<Intro />} />
+          <Route path="*" element={<Intro />} />
       </Routes>
     </div>
   );

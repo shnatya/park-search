@@ -47,6 +47,14 @@
 .between-text{
   margin: 0em 0em 0em;
 }
+
+.button-login {
+  width: 6.5em;
+  height: 2em;
+  margin-top: 5mm;
+  margin-bottom: 15mm;
+  border-radius: 7px;
+}
 .App {
   text-align: center;
 }

@@ -55,6 +55,19 @@
   margin-bottom: 15mm;
   border-radius: 7px;
 }
+
+.button-logout {
+  width: 5.5em;
+  height: 2em;
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+  border-radius: 10px;
+}
+
+.div {
+  position: relative;
+}
 .App {
   text-align: center;
 }

@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   resources :trips
-  
   resources :facility_copies
   resources :activity_facilities
-  resources :activities
+  #resources :activities #get
   resources :facilities
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -16,7 +15,8 @@ Rails.application.routes.draw do
   get '/me', to: 'users#show'
   post '/signup', to: 'users#create'
 
-  get '/hello', to: 'application#hello_world'
+  get '/activities', to: 'activities#index'
+  
 
   get '*path',
       to: 'fallback#index',

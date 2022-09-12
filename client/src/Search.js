@@ -1,25 +1,20 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-function Search({resetUser}) {
+function Search({activities}) {
     const [chosenActivity, setChosenActivity] = useState("")
     const navigate = useNavigate()
-
     
-    function handleLogout() {
-        fetch(("/logout"), { method: "DELETE"})
-        .then(res => {
-          if(res.ok) {
-            resetUser()
-            navigate("/login")
-          } })
-      }
-
+    function handleFilter(event){
+        setChosenActivity(event.target.value)
+        //updateErrors([])
+}
+console.log(chosenActivity)
     return (
         <div className="div">
-            <button onClick={handleLogout} className="button-logout">Log Out</button>
-            <h2>Park Search</h2>
-            
+            <select onChange={(event) => handleFilter(event)} value={chosenActivity} >  
+                {activities.map((activity, index) => <option key={index} value={activity.name}>{activity.name}</option>)}
+            </select>
         </div>
     )
 }

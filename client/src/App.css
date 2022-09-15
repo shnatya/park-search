@@ -1,49 +1,3 @@
-.gap {
-    margin-left: 5mm;
-}
-
-.header-buttons {
-  display: block;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-}
-
-.input {
-  margin:5px;
-}
-
-.form {
-  text-align: center;
-  border: grey solid 1px;
-  padding: 1rem;
-  width: 15rem;
-  height: 13rem;
-  display: inline-grid;
-  margin: 1rem 2rem;
-  box-shadow: 3px 4px #bae99b;
-  border-radius: 10px;
-}
-
-.button-login {
-  width: 6.5em;
-  height: 2em;
-  margin-top: 5mm;
-  margin-bottom: 15mm;
-  border-radius: 7px;
-}
-
-.container {
-  text-align: center;
-}
-
-.errors {
-  display: inline-block;
-  text-align: left;
-  font-size: 17px;
-  color: palevioletred;
-}
-
 .between-text{
   margin: 0em 0em 0em;
 }
@@ -65,9 +19,60 @@
   border-radius: 10px;
 }
 
+.card {
+  text-align: center;
+  border: grey solid 1px;
+  padding: 1rem;
+  width: 15rem;
+  height: 25rem;
+  display: inline-grid;
+  margin: 1rem 2rem;
+  box-shadow: 3px 4px #ecf1e9;
+  border-radius: 10px;
+}
+
+.container {
+  text-align: center;
+}
+
 .div {
   position: relative;
 }
+
+.errors {
+  display: inline-block;
+  text-align: left;
+  font-size: 17px;
+  color: palevioletred;
+}
+
+.form {
+  text-align: center;
+  border: grey solid 1px;
+  padding: 1rem;
+  width: 15rem;
+  height: 13rem;
+  display: inline-grid;
+  margin: 1rem 2rem;
+  box-shadow: 3px 4px #bae99b;
+  border-radius: 10px;
+}
+
+.gap {
+  margin-left: 5mm;
+}
+
+.header-buttons {
+  display: block;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.input {
+  margin:5px;
+}
+
 .App {
   text-align: center;
 }

@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   resources :trips
   resources :facility_copies
-  resources :activity_facilities
+  #resources :activity_facilities
   #resources :activities #get
-  resources :facilities
+  #resources :facilities
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -16,6 +16,10 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
 
   get '/activities', to: 'activities#index'
+
+  get '/facilities', to: 'facilities#index'
+
+  get '/activity_facilities', to: 'activity_facilities#index'
   
 
   get '*path',

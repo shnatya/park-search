@@ -12,6 +12,9 @@ import Header from './Header';
 function App() {
   const [user, setUser] = useState(null)
   const [activities, setActivities] = useState([])
+  const [facilities, setFacilities] = useState([])
+  const [activityFacilities, setActivityFacilities] = useState([])
+  const [facilitiesToDisplay, setFacilitiesToDisplay] = useState([])
   
   useEffect(() => {
     fetch("/activities")
@@ -22,6 +25,36 @@ function App() {
     })
     .catch(errors => console.log(errors))
   }, []) 
+
+  useEffect(() => {
+    fetch("/facilities")
+    .then(res => res.json())
+    .then(data => {
+      setFacilities(data)
+      //console.log(data)
+    })
+    .catch(errors => console.log(errors))
+  }, []) 
+
+  useEffect(()=> {
+    fetch("/activity_facilities")
+    .then(res => res.json())
+    .then(data => {
+      setActivityFacilities(data)
+    //console.log(data)
+  })
+  }, [])
+
+  function filterFacilitiesBy(activityName) {
+    let newArray = []
+    newArray=  activityFacilities.filter(object => {
+     if (object.activity.name === activityName) {
+       console.log(object)
+       return object
+     }})
+    setFacilitiesToDisplay(newArray)
+    console.log(newArray)
+  }
 
   useEffect(() => retrieveUser()
   , [])
@@ -50,6 +83,7 @@ function App() {
     )
   }
 
+
   return (
     <>
       {(user === null || user.id === undefined) ? null : loadHeader()}
@@ -57,7 +91,9 @@ function App() {
         <Routes>
             <Route path="/login" element={<Login onLogin={onLogin}/>} />
             <Route path="/signup" element={<Signup onLogin={onLogin}/>} />
-            <Route path="/search" element={<Search activities={activities}/> } />
+            <Route path="/search" element={<Search activities={activities} filterFacilitiesBy={filterFacilitiesBy}
+                   facilitiesToDisplay={facilitiesToDisplay}
+            /> } />
             <Route path="/" element={<Intro />} />
             <Route path="*" element={<Intro />} />
         </Routes>

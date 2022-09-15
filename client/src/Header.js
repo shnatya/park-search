@@ -18,8 +18,9 @@ function Header({user, resetUser, errors, updateErrors}) {
         <div className="div">
             <button onClick={handleLogout} className="button-logout">Log Out</button>
             <h2>Hello {user.username}!</h2>
-            <div className="button-header">
+            <div className="header-buttons">
                 <button  className="btn">My trips</button>
+                <button className="btn">Search</button>
             </div>
         
     </div>

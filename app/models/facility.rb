@@ -5,4 +5,9 @@ class Facility < ApplicationRecord
     has_many :users, through: :trips
 
     validates :facility_code, uniqueness: true
+
+    def short_description
+        "#{self.description[0..50]}..."
+      end
 end
+

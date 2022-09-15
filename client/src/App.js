@@ -41,7 +41,7 @@ function App() {
     .then(res => res.json())
     .then(data => {
       setActivityFacilities(data)
-    //console.log(data)
+    console.log(data)
   })
   }, [])
 

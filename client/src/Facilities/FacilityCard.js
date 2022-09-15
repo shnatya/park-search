@@ -6,7 +6,7 @@ function FacilityCard({facility}) {
         <div className="card">
             
                 <h2>{facility.name}</h2>
-                <p>{facility.description}</p>
+                <p>{facility.short_description}</p>
 
         </div>
     )

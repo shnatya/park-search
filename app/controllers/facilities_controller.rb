@@ -1,7 +1,8 @@
 class FacilitiesController < ApplicationController
     #GET "/facilities"
     def index 
-        facilities = Facility.all.order(:name)
-        render json: facilities
+        facilities = Facility.all
+        render json: facilities, methods: [:short_description]
+        
     end
 end

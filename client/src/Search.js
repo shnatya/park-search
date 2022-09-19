@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom"
 
 function Search({activities, chosenActivity, filterFacilitiesBy, facilitiesToDisplay, handleReadMore, handleAddTrip}) {
     const navigate = useNavigate()
-
-    console.log(chosenActivity)
     
     function handleFilter(event){
         filterFacilitiesBy(event.target.value)

@@ -113,7 +113,7 @@ function App() {
                     handleAddTrip={handleAddTrip}/> } />
             <Route path="/read-more" element={<ReadMore facility={readAboutThisFacility}/>}/>
             <Route path="/trips" element={<MyTrips />}/>
-            <Route path="/add-new-trip" element={<NewFormTrip facility={wantToAddFacilityToTrips}/>}/>
+            <Route path="/add-new-trip" element={<NewFormTrip user={user} facility={wantToAddFacilityToTrips}/>}/>
             <Route path="/" element={<Intro />} />
             <Route path="*" element={<Intro />} />
         </Routes>

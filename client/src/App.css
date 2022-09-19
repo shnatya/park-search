@@ -49,6 +49,11 @@
   position: relative;
 }
 
+.div-input-order {
+  float: right;
+  margin-right: 20px;
+}
+
 .errors {
   display: inline-block;
   text-align: left;
@@ -81,6 +86,30 @@
 
 .input {
   margin:5px;
+}
+
+.input-trip{
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 9px;
+  height: 30px;
+  width: 450px;
+  text-align: left;
+  margin: 6px;
+  font-size: 16px;
+  padding-left: 15px;
+}
+
+.new-trip-form {
+  text-align: center;
+  border: grey solid 1px;
+  padding: 1rem;
+  width: 650px;
+  height: 420px;
+  display: inline-grid;
+  margin: 1rem 2rem;
+  box-shadow: 3px 4px #bae99b;
+  border-radius: 10px;
 }
 
 .read-more {

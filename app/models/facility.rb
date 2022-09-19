@@ -8,7 +8,7 @@ class Facility < ApplicationRecord
     validates :facility_code, uniqueness: true
 
     def short_description
-        "#{self.description[0..150]}..."
+        "#{self.description[0..450]}..."
     end
 
     def all_activities

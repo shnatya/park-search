@@ -2,14 +2,12 @@ import React, { useState } from "react"
 import Facilities from './Facilities/Facilities'
 import { useNavigate } from "react-router-dom"
 
-function Search({activities, filterFacilitiesBy, facilitiesToDisplay}) {
-    const [chosenActivity, setChosenActivity] = useState("")
+function Search({activities, chosenActivity, filterFacilitiesBy, facilitiesToDisplay, handleReadMore, handleAddTrip}) {
     const navigate = useNavigate()
 
-    console.log(facilitiesToDisplay)
+    console.log(chosenActivity)
     
     function handleFilter(event){
-        setChosenActivity(event.target.value)
         filterFacilitiesBy(event.target.value)
 }
 
@@ -20,8 +18,9 @@ function Search({activities, filterFacilitiesBy, facilitiesToDisplay}) {
                 <option value="" disabled defaultValue hidden>Please choose activity...</option>
                 {activities.map((activity, index) => <option key={index} value={activity.name}>{activity.name}</option>)}
             </select>
-            <h2>We have found {facilitiesToDisplay.length} facility(-ies) for you.</h2>
-            {facilitiesToDisplay === [] ? null : <Facilities facilitiesToDisplay={facilitiesToDisplay}/>}
+            <h2>We have found {facilitiesToDisplay.length} facility(-ies).</h2>
+            {facilitiesToDisplay === [] ? null : <Facilities facilitiesToDisplay={facilitiesToDisplay} handleReadMore={handleReadMore}
+                                                handleAddTrip={handleAddTrip}/>}
         </div>
     )
 }

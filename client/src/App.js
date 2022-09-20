@@ -68,9 +68,13 @@ function App() {
     navigate("/read-more")
   }
 
-  function handleAddTrip(facility) {
+  function passNewFacility(facility) {
     setWantToAddFacilityToTrips(facility)
     navigate("/add-new-trip")
+  }
+
+  function addNewTrip(newTrip) {
+
   }
 
   useEffect(() => retrieveUser()
@@ -110,10 +114,10 @@ function App() {
             <Route path="/signup" element={<Signup onLogin={onLogin}/>} />
             <Route path="/search" element={<Search activities={activities} filterFacilitiesBy={filterFacilitiesBy}
                    facilitiesToDisplay={facilitiesToDisplay} chosenActivity={chosenActivity} handleReadMore={handleReadMore}
-                    handleAddTrip={handleAddTrip}/> } />
+                    passNewFacility={passNewFacility}/> } />
             <Route path="/read-more" element={<ReadMore facility={readAboutThisFacility}/>}/>
             <Route path="/trips" element={<MyTrips />}/>
-            <Route path="/add-new-trip" element={<NewFormTrip user={user} facility={wantToAddFacilityToTrips}/>}/>
+            <Route path="/add-new-trip" element={<NewFormTrip user={user} facility={wantToAddFacilityToTrips} addNewTrip={addNewTrip}/>}/>
             <Route path="/" element={<Intro />} />
             <Route path="*" element={<Intro />} />
         </Routes>

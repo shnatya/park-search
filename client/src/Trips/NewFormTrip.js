@@ -3,7 +3,7 @@ import { useState } from "react";
 
 
 
-function NewFormTrip({facility}) {
+function NewFormTrip({facility, addNewTrip}) {
     const [newTrip, setNewTrip] = useState({
         comment: "",
         visited_at: "",
@@ -20,7 +20,7 @@ console.log(newTrip)
         })
     }
     function handleSubmit() {
-
+        addNewTrip(newTrip)
     }
 
     return (
@@ -28,19 +28,20 @@ console.log(newTrip)
             <h1>Add New Trip</h1>
             <div className="new-trip-form">
                 <form onSubmit={handleSubmit}>
+                    <h4>{facility.name}</h4>
                     <div className="div-input-order">
-                        <h4>{facility.name}</h4>
+                        <label htmlFor="review" className="label">Review: </label> 
+                        <select onChange={(event) => handleInput(event)} name="review" value={newTrip.review} > 
+                            {rateArray.map((rate, index) => <option  key={index} value={rate}>{rate}</option>)}
+                        </select>
                     </div>
-                    <select onChange={(event) => handleInput(event)} name="review" value={newTrip.review} >  
-                        {rateArray.map((rate, index) => <option  key={index} value={rate}>{rate}</option>)}
-                    </select>
                     <div className="div-input-order">
-                        <label htmlFor="type" className="label">Your comment: </label>
+                        <label htmlFor="comment" className="label">Your comment: </label>
                         <input type="text" id="comment" name="comment" value={newTrip.comment} onChange={handleInput} className="input-trip"
                             placeholder="It was great!" />
                     </div>
                     <div className="div-input-order">
-                        <label htmlFor="type" className="label">Visited at: </label>
+                        <label htmlFor="visited_at" className="label">Visited at: </label>
                         <input type="text" id="visited_at" name="visited_at" value={newTrip.visited_at} onChange={handleInput} className="input-trip"
                             placeholder="July 2022" />
                     </div>

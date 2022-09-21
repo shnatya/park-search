@@ -21,6 +21,7 @@ function Header({user, resetUser, errors, updateErrors}) {
     }
 
     function handleClickOnTrips() {
+        updateErrors([])
         navigate("/trips")
     }
     return (

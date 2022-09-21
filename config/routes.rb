@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :trips
+  #resources :trips
   resources :facility_copies
   #resources :activity_facilities
   #resources :activities #get
@@ -17,9 +17,13 @@ Rails.application.routes.draw do
 
   get '/activities', to: 'activities#index'
 
+  get '/activity_facilities', to: 'activity_facilities#index'
+
   get '/facilities', to: 'facilities#index'
 
-  get '/activity_facilities', to: 'activity_facilities#index'
+  get '/trips', to: 'trips#index'
+  post '/trips', to: 'trips#create'
+  
   
 
   get '*path',

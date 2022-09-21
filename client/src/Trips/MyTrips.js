@@ -1,11 +1,11 @@
 import React from "react";
 
 
-function MyTrips({}) {
+function MyTrips({trips}) {
 
     return (
         <div>
-            <h3>Your trips</h3>
+            <h3>My trips</h3>
             
         </div>
     )

@@ -97,12 +97,13 @@ function App() {
       },
       body: JSON.stringify({...newTrip, user_id: user.id})
     })
-    .then(res => res.json())
+    .then(brr => brr.json())
     .then(data => {
       if(data.errors){
         updateErrors(data.errors)
       }else {
         setTrips([...trips, data])
+        console.log(data)
         updateErrors([`Trip has been added.`])
         navigate('/trips')
       }
@@ -131,7 +132,7 @@ function App() {
   function loadHeader() {
     return (
     <div>
-        <Header user={user} resetUser={resetUser}  />
+        <Header user={user} resetUser={resetUser}  errors={errors} updateErrors={updateErrors} />
     </div>
     )
   }
@@ -148,7 +149,7 @@ function App() {
                    facilitiesToDisplay={facilitiesToDisplay} chosenActivity={chosenActivity} handleReadMore={handleReadMore}
                     passNewFacility={passNewFacility}/> } />
             <Route path="/read-more" element={<ReadMore facility={readAboutThisFacility}/>}/>
-            <Route path="/trips" element={<MyTrips />}/>
+            <Route path="/trips" element={<MyTrips trips={trips}/>}/>
             <Route path="/add-new-trip" element={<NewFormTrip facility={wantToAddFacilityToTrips} addNewTrip={addNewTrip}/>}/>
             <Route path="/" element={<Intro />} />
             <Route path="*" element={<Intro />} />

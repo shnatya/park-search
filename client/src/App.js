@@ -14,6 +14,8 @@ import NewFormTrip from './Trips/NewFormTrip';
 
 function App() {
   const [user, setUser] = useState(null)
+  const [trips, setTrips] = useState([])
+  const [errors, setErrors] = useState([])
   const [activities, setActivities] = useState([])
   const [facilities, setFacilities] = useState([])
   const [activityFacilities, setActivityFacilities] = useState([])
@@ -26,6 +28,10 @@ function App() {
 
   const navigate = useNavigate()
   
+  function updateErrors(newErrors) {
+    setErrors(newErrors)
+  }
+
   useEffect(() => {
     fetch("/activities")
     .then(res => res.json())
@@ -49,9 +55,19 @@ function App() {
     fetch("/activity_facilities")
     .then(res => res.json())
     .then(data => {
+      console.log(data)
       setActivityFacilities(data)
   })
   }, [])
+
+  useEffect(() => {
+    fetch("/trips")
+    .then(res => res.json())
+    .then(data => {
+      setTrips(data)
+    })
+    .catch(errors => console.log(errors))
+  }, []) 
 
   function filterFacilitiesBy(activityName) {
     setChosenActivity(activityName)
@@ -74,9 +90,25 @@ function App() {
   }
 
   function addNewTrip(newTrip) {
-
+    fetch("/trips", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({...newTrip, user_id: user.id})
+    })
+    .then(res => res.json())
+    .then(data => {
+      if(data.errors){
+        updateErrors(data.errors)
+      }else {
+        setTrips([...trips, data])
+        updateErrors([`Trip has been added.`])
+        navigate('/trips')
+      }
+    })
   }
-
+  
   useEffect(() => retrieveUser()
   , [])
 
@@ -117,7 +149,7 @@ function App() {
                     passNewFacility={passNewFacility}/> } />
             <Route path="/read-more" element={<ReadMore facility={readAboutThisFacility}/>}/>
             <Route path="/trips" element={<MyTrips />}/>
-            <Route path="/add-new-trip" element={<NewFormTrip user={user} facility={wantToAddFacilityToTrips} addNewTrip={addNewTrip}/>}/>
+            <Route path="/add-new-trip" element={<NewFormTrip facility={wantToAddFacilityToTrips} addNewTrip={addNewTrip}/>}/>
             <Route path="/" element={<Intro />} />
             <Route path="*" element={<Intro />} />
         </Routes>

@@ -11,7 +11,7 @@ function NewFormTrip({facility, addNewTrip}) {
         facility_id: facility.id
     })
     const rateArray = Array(1, 2, 3, 4, 5)
-console.log(newTrip)
+    console.log(newTrip)
 
     function handleInput(event) {
         setNewTrip({
@@ -19,8 +19,15 @@ console.log(newTrip)
             [event.target.name]: event.target.value
         })
     }
-    function handleSubmit() {
+    function handleSubmit(event) {
+        event.preventDefault()
         addNewTrip(newTrip)
+        setNewTrip({
+            comment: "",
+            visited_at: "",
+            review: 1,
+            facility_id: facility.id
+        })
     }
 
     return (

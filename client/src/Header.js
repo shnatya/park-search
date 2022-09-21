@@ -16,6 +16,7 @@ function Header({user, resetUser, errors, updateErrors}) {
       }
     
     function handleClickOnSearch() {
+        updateErrors([])
         navigate("/search")
     }
 
@@ -30,7 +31,7 @@ function Header({user, resetUser, errors, updateErrors}) {
                 <button onClick={handleClickOnTrips} className="btn">My trips</button>
                 <button onClick={handleClickOnSearch} className="btn">Search</button>
             </div>
-        
+            <ErrorList errors={errors} className="between-text"/>
     </div>
     )
 }

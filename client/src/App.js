@@ -61,10 +61,11 @@ function App() {
   }, [])
 
   useEffect(() => {
-    fetch("/trips")
+    fetch("users/trips")
     .then(res => res.json())
-    .then(data => {
-      setTrips(data)
+    .then(userTrips => {
+      setTrips(userTrips)
+      //console.log(userTrips)
     })
     .catch(errors => console.log(errors))
   }, []) 

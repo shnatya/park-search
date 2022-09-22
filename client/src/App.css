@@ -129,6 +129,14 @@
   border-radius: 10px;
 } 
 
+.trip-update {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: 190px;
+  border-radius: 5px;
+  border-width: 0.05mm;
+}
+
 .App {
   text-align: center;
 }

@@ -20,10 +20,9 @@ Rails.application.routes.draw do
 
   get '/facilities', to: 'facilities#index'
 
-  get '/trips', to: 'trips#index'
   post '/trips', to: 'trips#create'
   
-  
+  get '/users/trips', to: 'trips#index'
 
   get '*path',
       to: 'fallback#index',

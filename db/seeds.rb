@@ -10,9 +10,9 @@ require 'json'
 puts "Seeding FacilityCopy..."
 Facility.destroy_all
 facility_copy = []
-limit = 1000
+limit = 200
 offset = 0
-max_records = 1000
+max_records = 200
 cur_records = 0
 while (true) do
 # make a request to the endpoint:

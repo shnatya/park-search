@@ -1,11 +1,11 @@
 class TripsController < ApplicationController
-    before_action :authorized, only: [:create]
-   # before_action :trip, only: [:destroy, :update]
-    before_action :find_user, only: [:create]
+    before_action :authorized, only: [:create, :index]
+   # before_action :find_trip, only: [:destroy, :update]
+    before_action :find_user, only: [:create, :index]
 
-    #GET "/trips"
+    #GET "/users/trips" 
     def index
-        trips = Trip.all
+        trips = @user.trips
         render json: trips
     end
 

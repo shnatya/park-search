@@ -24,7 +24,7 @@ function App() {
   const [readAboutThisFacility, setReadAboutThisFacility] = useState({})
   const [wantToAddFacilityToTrips, setWantToAddFacilityToTrips] = useState({})
 
-  //console.log(readAboutThisFacility)
+  console.log(trips)
 
   const navigate = useNavigate()
   
@@ -63,9 +63,9 @@ function App() {
   useEffect(() => {
     fetch("users/trips")
     .then(res => res.json())
-    .then(userTrips => {
-      setTrips(userTrips)
-      //console.log(userTrips)
+    .then(data => {
+      setTrips(data)
+      console.log(data)
     })
     .catch(errors => console.log(errors))
   }, []) 

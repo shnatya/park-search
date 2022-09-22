@@ -8,7 +8,7 @@ function FacilityCard({facility, handleReadMore, passNewFacility}) {
     return (
         <div>
                 <h1>{facility.name}</h1>
-                <button onClick={() => passNewFacility(facility)}>Add trip</button>
+                <button onClick={() => passNewFacility(facility)} className="btn">Add trip</button>
                 <div dangerouslySetInnerHTML={{ __html: facility.short_description }}></div>
                 <button onClick={() => handleReadMore(facility)} className="read-more">Read more ...</button>
                 

@@ -89,7 +89,7 @@ function App() {
     navigate("/add-new-trip")
   }
 
-  function addNewTrip(newTrip) {
+  function addNewTrip(newTrip) {    
     fetch("/trips", {
       method: "POST",
       headers: {
@@ -150,7 +150,8 @@ function App() {
                     passNewFacility={passNewFacility}/> } />
             <Route path="/read-more" element={<ReadMore facility={readAboutThisFacility}/>}/>
             <Route path="/trips" element={<MyTrips trips={trips}/>}/>
-            <Route path="/add-new-trip" element={<NewFormTrip facility={wantToAddFacilityToTrips} addNewTrip={addNewTrip}/>}/>
+            <Route path="/add-new-trip" element={<NewFormTrip facility={wantToAddFacilityToTrips} addNewTrip={addNewTrip}
+             updateErrors={updateErrors}/>}/>
             <Route path="/" element={<Intro />} />
             <Route path="*" element={<Intro />} />
         </Routes>

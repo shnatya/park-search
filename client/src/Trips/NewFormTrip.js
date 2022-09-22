@@ -3,7 +3,7 @@ import { useState } from "react";
 
 
 
-function NewFormTrip({facility, addNewTrip}) {
+function NewFormTrip({facility, addNewTrip, updateErrors}) {
     const [newTrip, setNewTrip] = useState({
         comment: "",
         visited_at: "",
@@ -14,6 +14,7 @@ function NewFormTrip({facility, addNewTrip}) {
     console.log(newTrip)
 
     function handleInput(event) {
+        updateErrors([])
         setNewTrip({
             ...newTrip,
             [event.target.name]: event.target.value

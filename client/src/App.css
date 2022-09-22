@@ -10,6 +10,14 @@
   margin: 0em 0em 0em;
 }
 
+.btn {
+  width: 7.7em;
+  height: 2em;
+  right: 20px;
+  bottom: 20px;
+  border-radius: 10px;
+}
+
 .button-login {
   width: 6.5em;
   height: 2em;
@@ -114,12 +122,12 @@
 
 .read-more {
   text-align: center;
-  border: grey solid 1px;
+  border: rgb(196, 235, 155) solid 1px;
   width: 7rem;
   margin: 0.5rem 28rem 0.5rem;
-  box-shadow: 3px 4px #ecf1e9;
+  box-shadow: 2px 3px #c8f3ad;
   border-radius: 10px;
-}
+} 
 
 .App {
   text-align: center;

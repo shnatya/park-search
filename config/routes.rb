@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   #resources :trips
-  resources :facility_copies
   #resources :activity_facilities
   #resources :activities #get
   #resources :facilities

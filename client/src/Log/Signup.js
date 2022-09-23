@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate} from "react-router-dom"
 import ErrorList from "../Errors/ErrorList";
 
-function Signup({onLogin}) {
+function Signup({onLogin, requestUserTrips}) {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [passwordConfirmation, setPasswordConfirmation] = useState("")
@@ -26,6 +26,7 @@ function Signup({onLogin}) {
             if(res.ok){
                 res.json().then(user => {
                     onLogin(user)
+                    requestUserTrips()
                     navigate("/search")
                 })
             }else{

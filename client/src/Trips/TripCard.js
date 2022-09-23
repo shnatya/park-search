@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 
 function TripCard({trip}) {
-
+    const review = new Array(trip.review).fill(true) 
+    
     function handleUpdateTrip() {
 
     }
@@ -11,9 +12,11 @@ function TripCard({trip}) {
         <div className="card">
              <div className="div">
                 
-                <button type="button" onClick={handleUpdateTrip} className="trip-update">X</button>
+                <button type="button" onClick={handleUpdateTrip} className="delete-button">X</button>
             </div>
-            <h2>&#127775;</h2>
+            <div>
+                {review.map(item => <span>&#127775;</span>)}
+            </div>
             <h2>{trip.facility.name}</h2>
             <h3 className="between-text">My comment: {trip.comment}</h3> 
             <button type="button" onClick={handleUpdateTrip} className="trip-update">Update</button>

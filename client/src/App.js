@@ -60,7 +60,7 @@ function App() {
   })
   }, [])
 
-  useEffect(() => {
+  function requestUserTrips() {
     fetch("users/trips")
     .then(res => res.json())
     .then(data => {
@@ -68,7 +68,8 @@ function App() {
       console.log(data)
     })
     .catch(errors => console.log(errors))
-  }, []) 
+  }
+   
 
   function filterFacilitiesBy(activityName) {
     setChosenActivity(activityName)
@@ -144,8 +145,8 @@ function App() {
       {(user === null || user.id === undefined) ? null : loadHeader()}
       <div className="App">
         <Routes>
-            <Route path="/login" element={<Login onLogin={onLogin}/>} />
-            <Route path="/signup" element={<Signup onLogin={onLogin}/>} />
+            <Route path="/login" element={<Login onLogin={onLogin} requestUserTrips={requestUserTrips}/>} />
+            <Route path="/signup" element={<Signup onLogin={onLogin} requestUserTrips={requestUserTrips}/>} />
             <Route path="/search" element={<Search activities={activities} filterFacilitiesBy={filterFacilitiesBy}
                    facilitiesToDisplay={facilitiesToDisplay} chosenActivity={chosenActivity} handleReadMore={handleReadMore}
                     passNewFacility={passNewFacility}/> } />

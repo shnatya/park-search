@@ -39,7 +39,7 @@
   text-align: center;
   border: grey solid 1px;
   padding: 1rem;
-  width: 30rem;
+  width: 20rem;
   height: 15rem;
   position:relative;
   display: flex;
@@ -51,6 +51,14 @@
 
 .container {
   text-align: center;
+}
+
+.delete-button {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: 290px;
+  border-radius: 5px;
+  border-width: 0.05mm;
 }
 
 .div {
@@ -120,12 +128,6 @@
   border-radius: 10px;
 }
 
-.trips-page {
-  display: grid;
-  grid-column-gap: 1px;
-  grid-template-columns: 1fr 1fr ;
-}
-
 .read-more {
   text-align: center;
   border: rgb(196, 235, 155) solid 1px;
@@ -135,10 +137,17 @@
   border-radius: 10px;
 } 
 
+.trips-page {
+  display: grid;
+  grid-column-gap: 1px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
 .trip-update {
-  width: 1.5rem;
+  width: 5.5rem;
   height: 1.5rem;
-  margin-left: 190px;
+  margin-left: 120px;
+  margin-top: 20px;
   border-radius: 5px;
   border-width: 0.05mm;
 }

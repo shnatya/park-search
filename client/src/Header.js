@@ -2,7 +2,7 @@ import React from "react";
 import ErrorList from "./Errors/ErrorList";
 import { useNavigate} from "react-router-dom"
 
-function Header({user, resetUser, errors, updateErrors}) {
+function Header({user, resetUser, errors, updateErrors, handleSwitchButtons}) {
     const navigate = useNavigate()
     //console.log(user.username)
 
@@ -17,11 +17,13 @@ function Header({user, resetUser, errors, updateErrors}) {
     
     function handleClickOnSearch() {
         updateErrors([])
+        handleSwitchButtons("search")
         navigate("/search")
     }
 
     function handleClickOnTrips() {
         updateErrors([])
+        handleSwitchButtons("trips")
         navigate("/trips")
     }
     return (

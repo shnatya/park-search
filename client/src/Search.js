@@ -2,7 +2,8 @@ import React, { useState } from "react"
 import Facilities from './Facilities/Facilities'
 import { useNavigate } from "react-router-dom"
 
-function Search({activities, chosenActivity, filterFacilitiesBy, facilitiesToDisplay, handleReadMore, passNewFacility}) {
+function Search({activities, chosenActivity, filterFacilitiesBy, facilitiesToDisplay,
+                switchButtons, handleReadMore, passNewFacility}) {
     const navigate = useNavigate()
     
     function handleFilter(event){
@@ -18,7 +19,7 @@ function Search({activities, chosenActivity, filterFacilitiesBy, facilitiesToDis
             </select>
             <h2>We have found {facilitiesToDisplay.length} facility(-ies).</h2>
             {facilitiesToDisplay === [] ? null : <Facilities facilitiesToDisplay={facilitiesToDisplay} handleReadMore={handleReadMore}
-                                                passNewFacility={passNewFacility}/>}
+                                                passNewFacility={passNewFacility} switchButtons={switchButtons}/>}
         </div>
     )
 }

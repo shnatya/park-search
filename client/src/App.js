@@ -23,6 +23,7 @@ function App() {
   const [chosenActivity, setChosenActivity] = useState("")
   const [readAboutThisFacility, setReadAboutThisFacility] = useState({})
   const [wantToAddFacilityToTrips, setWantToAddFacilityToTrips] = useState({})
+  const [switchButtons, setSwitchButtons] = useState("search")
 
   console.log(trips)
 
@@ -115,11 +116,16 @@ function App() {
   useEffect(() => retrieveUser()
   , [])
 
+  function handleSwitchButtons(button) {
+    setSwitchButtons(button)
+  }
+
   function retrieveUser(){
       fetch("/me")
       .then(res => res.json())
       .then(user => {
         setUser(user)
+        requestUserTrips()
       })
   }
 
@@ -129,12 +135,15 @@ function App() {
 
   function resetUser(){
     setUser(null)
+    updateErrors([])
+    setChosenActivity("")
+    setFacilitiesToDisplay([])
   }
 
   function loadHeader() {
     return (
     <div>
-        <Header user={user} resetUser={resetUser}  errors={errors} updateErrors={updateErrors} />
+        <Header user={user} resetUser={resetUser}  errors={errors} updateErrors={updateErrors} handleSwitchButtons={handleSwitchButtons}/>
     </div>
     )
   }
@@ -149,9 +158,10 @@ function App() {
             <Route path="/signup" element={<Signup onLogin={onLogin} requestUserTrips={requestUserTrips}/>} />
             <Route path="/search" element={<Search activities={activities} filterFacilitiesBy={filterFacilitiesBy}
                    facilitiesToDisplay={facilitiesToDisplay} chosenActivity={chosenActivity} handleReadMore={handleReadMore}
-                    passNewFacility={passNewFacility}/> } />
-            <Route path="/read-more" element={<ReadMore facility={readAboutThisFacility}/>}/>
-            <Route path="/trips" element={<MyTrips trips={trips}/>}/>
+                    passNewFacility={passNewFacility} /> } />
+            <Route path="/read-more" element={<ReadMore facility={readAboutThisFacility} passNewFacility={passNewFacility}
+                    switchButtons={switchButtons}/>}/>
+            <Route path="/trips" element={<MyTrips trips={trips} handleReadMore={handleReadMore}/>}/>
             <Route path="/add-new-trip" element={<NewFormTrip facility={wantToAddFacilityToTrips} addNewTrip={addNewTrip}
              updateErrors={updateErrors}/>}/>
             <Route path="/" element={<Intro />} />

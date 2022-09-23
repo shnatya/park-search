@@ -16,6 +16,7 @@
   right: 20px;
   bottom: 20px;
   border-radius: 10px;
+  margin-bottom: 2em;
 }
 
 .button-login {
@@ -40,7 +41,7 @@
   border: grey solid 1px;
   padding: 1rem;
   width: 20rem;
-  height: 15rem;
+  height: 20rem;
   position:relative;
   display: flex;
   flex-direction: column;
@@ -49,6 +50,12 @@
   border-radius: 10px;
 }
 
+.comment-text {
+  font-family: 'Times New Roman', Times, serif;
+  font-size:x-large;
+  color: rgb(241, 203, 12);
+  margin: 0em 0em 0em;
+}
 .container {
   text-align: center;
 }
@@ -116,12 +123,23 @@
   padding-left: 15px;
 }
 
+.invisible-button {
+  border: none;
+  background-color: #4CAF50;
+  font-size: 18px;
+}
+
+.invisible-button:hover {
+  background-color: #7eb880; /* Green */
+  color: white;
+}
+
 .new-trip-form {
   text-align: center;
   border: grey solid 1px;
   padding: 1rem;
   width: 650px;
-  height: 420px;
+  height: 220px;
   display: inline-grid;
   margin: 1rem 2rem;
   box-shadow: 3px 4px #bae99b;

@@ -44,7 +44,7 @@ function NewFormTrip({facility, addNewTrip, updateErrors}) {
                         </select>
                     </div>
                     <div className="div-input-order">
-                        <label htmlFor="comment" className="label">Your comment: </label>
+                        <label htmlFor="comment" className="label">My comment: </label>
                         <input type="text" id="comment" name="comment" value={newTrip.comment} onChange={handleInput} className="input-trip"
                             placeholder="It was great!" />
                     </div>

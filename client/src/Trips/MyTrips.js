@@ -1,9 +1,9 @@
 import React from "react";
 import TripCard from "./TripCard"
 
-function MyTrips({trips}) {
+function MyTrips({trips, handleReadMore}) {
     console.log(trips)
-    let arrayOfTrips = trips.map(trip => <TripCard key={trip.id} trip={trip} />)
+    let arrayOfTrips = trips.map(trip => <TripCard key={trip.id} trip={trip} handleReadMore={handleReadMore}/>)
 
     return (
         <div>

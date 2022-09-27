@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get '/facilities', to: 'facilities#index'
 
   post '/trips', to: 'trips#create'
+  delete '/trips/:id', to: 'trips#destroy'
   
   get '/users/trips', to: 'trips#index'
 

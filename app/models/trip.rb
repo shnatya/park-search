@@ -3,5 +3,5 @@ class Trip < ApplicationRecord
   belongs_to :facility
 
   validates :comment, :review, :visited_at, presence: true
-  validates :comment, length: {minimum: 3}
+  validates :comment, length: {minimum: 5}
 end

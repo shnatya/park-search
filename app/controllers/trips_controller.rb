@@ -1,6 +1,6 @@
 class TripsController < ApplicationController
     before_action :authorized, only: [:create, :index]
-   # before_action :find_trip, only: [:destroy, :update]
+    before_action :find_trip, only: [:destroy]
     before_action :find_user, only: [:create, :index]
 
     #GET "/users/trips" 
@@ -13,6 +13,12 @@ class TripsController < ApplicationController
     def create
         trip = Trip.create!(trip_params)
         render json: trip
+    end
+
+    #DELETE "/trips/:id"
+    def destroy
+        @trip.destroy
+        render json: @trip
     end
 
     private 

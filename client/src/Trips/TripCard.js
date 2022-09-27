@@ -2,18 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 
-function TripCard({trip, handleReadMore}) {
+function TripCard({trip, handleReadMore, handleDeleteTrip}) {
     const review = new Array(trip.review).fill(true) 
 
     function handleUpdateTrip() {
 
     }
 
-
     return (
         <div className="card">
              <div className="div">
-                <button type="button" onClick={handleUpdateTrip} className="delete-button">X</button>
+                <button type="button" onClick={() => handleDeleteTrip(trip)} className="delete-button">X</button>
             </div>
             <div>
                 {review.map(item => <span>&#127775;</span>)}

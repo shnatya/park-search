@@ -112,7 +112,26 @@ function App() {
       }
     })
   }
+
+  function handleDeleteTrip(trip) {
+    fetch(`/trips/${trip.id}`, {
+        method: "DELETE"})
+        .then(res => res.json())
+        .then(trip => {
+            if(trip.errors) {
+                updateErrors(trip.errors)}
+            else{
+                deleteTrip(trip)}
+            })
+    }
   
+  function deleteTrip(deletedTrip) {
+    let newArrayOfTrips = [...trips]
+    newArrayOfTrips = newArrayOfTrips.filter(obj => obj.id !== deletedTrip.id)
+    setTrips(newArrayOfTrips)
+    updateErrors(["Trip has been deleted."])
+  }
+
   useEffect(() => retrieveUser()
   , [])
 
@@ -161,7 +180,7 @@ function App() {
                     passNewFacility={passNewFacility} /> } />
             <Route path="/read-more" element={<ReadMore facility={readAboutThisFacility} passNewFacility={passNewFacility}
                     switchButtons={switchButtons}/>}/>
-            <Route path="/trips" element={<MyTrips trips={trips} handleReadMore={handleReadMore}/>}/>
+            <Route path="/trips" element={<MyTrips trips={trips} handleReadMore={handleReadMore} handleDeleteTrip={handleDeleteTrip}/>}/>
             <Route path="/add-new-trip" element={<NewFormTrip facility={wantToAddFacilityToTrips} addNewTrip={addNewTrip}
              updateErrors={updateErrors}/>}/>
             <Route path="/" element={<Intro />} />

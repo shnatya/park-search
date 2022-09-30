@@ -14,7 +14,7 @@ function FacilityCard({facility, handleReadMore, passNewFacility}) {
                 
                 <ul>
                     <h3>All activities:</h3>
-                    {facility.all_activities.map(activity => <h5 className="activities-horizontal">{activity.name}</h5>)}
+                    {facility.all_activities.map(activity => <h5 key={activity.id} className="activities-horizontal">{activity.name}</h5>)}
                 </ul>
                 <h1>&#127794;&#127794;&#127794;&#127794;&#127794;</h1>
         </div>

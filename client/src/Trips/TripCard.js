@@ -1,12 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
-function TripCard({trip, handleReadMore, handleDeleteTrip}) {
+function TripCard({trip, handleReadMore, handleDeleteTrip, updateTrip, updateErrors}) {
     const review = new Array(trip.review).fill(true) 
-
+    const navigate = useNavigate()
+    
     function handleUpdateTrip() {
-
+        updateErrors([])
+        updateTrip(trip)
     }
 
     return (
@@ -15,7 +17,7 @@ function TripCard({trip, handleReadMore, handleDeleteTrip}) {
                 <button type="button" onClick={() => handleDeleteTrip(trip)} className="delete-button">X</button>
             </div>
             <div>
-                {review.map(item => <span>&#127775;</span>)}
+                {review.map((item, index) => <span key={index}>&#127775;</span>)}
             </div>
             <button onClick={() => handleReadMore(trip.facility)} className="invisible-button">{trip.facility.name}</button> 
             <h5>{trip.visited_at}</h5>

@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
   post '/trips', to: 'trips#create'
   delete '/trips/:id', to: 'trips#destroy'
-  
+  patch '/trips/:id', to: 'trips#update'
   get '/users/trips', to: 'trips#index'
 
   get '*path',

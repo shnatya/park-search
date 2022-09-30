@@ -1,6 +1,6 @@
 class TripsController < ApplicationController
     before_action :authorized, only: [:create, :index]
-    before_action :find_trip, only: [:destroy]
+    before_action :find_trip, only: [:destroy, :update]
     before_action :find_user, only: [:create, :index]
 
     #GET "/users/trips" 
@@ -14,6 +14,16 @@ class TripsController < ApplicationController
         trip = Trip.create!(trip_params)
         render json: trip
     end
+
+    #PATCH "/trips/:id"
+    def update
+        if @trip[:user_id] == session[:user_id]
+            @trip.update!(trip_params)
+            render json: @trip
+        else
+           render json: {errors: ["Not authorized to update this trip!"]}, status: :unauthorized
+        end
+    end 
 
     #DELETE "/trips/:id"
     def destroy

@@ -1,7 +1,7 @@
 import './App.css';
 
 import { useState, useEffect } from "react";
-import { Navigate, Route, Routes, useNavigate} from 'react-router-dom'
+import { Route, Routes, useNavigate} from 'react-router-dom'
 import Login from './Log/Login';
 import Signup from './Log/Signup'
 import Intro from './Intro';
@@ -10,6 +10,7 @@ import Header from './Header';
 import ReadMore from './Facilities/ReadMore';
 import MyTrips from './Trips/MyTrips';
 import NewFormTrip from './Trips/NewFormTrip';
+import UpdateTripForm from './Trips/UpdateTripForm';
 
 
 function App() {
@@ -24,8 +25,7 @@ function App() {
   const [readAboutThisFacility, setReadAboutThisFacility] = useState({})
   const [wantToAddFacilityToTrips, setWantToAddFacilityToTrips] = useState({})
   const [switchButtons, setSwitchButtons] = useState("search")
-
-  console.log(trips)
+  const [updateThisTrip, setUpdateThisTrip] = useState([])
 
   const navigate = useNavigate()
   
@@ -132,6 +132,40 @@ function App() {
     updateErrors(["Trip has been deleted."])
   }
 
+  function addUpdatedTripToDB(updatedTrip) {
+    let updatedTripDB = [...trips]
+    updatedTripDB = updatedTripDB.map(trip => updatedTrip.id === trip.id ? updatedTrip : trip)
+
+    setTrips(updatedTripDB)
+  } 
+
+  function newInfoForTrip(updatedTrip) {
+    console.log(updatedTrip)
+    fetch(`/trips/${updatedTrip.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({...updatedTrip, user_id: user.id})
+    })
+    .then(res => res.json()
+    .then(data => {
+      if(data.errors) {
+        updateErrors(data.errors)
+        navigate('/update-trip')
+      }else { 
+        addUpdatedTripToDB(data)
+        navigate('/trips')
+      }
+    }))
+  }
+  
+  function updateTrip(trip) {
+    setUpdateThisTrip(trip)
+    console.log(trip)
+    navigate('/update-trip')
+  }
+
   useEffect(() => retrieveUser()
   , [])
 
@@ -180,9 +214,11 @@ function App() {
                     passNewFacility={passNewFacility} /> } />
             <Route path="/read-more" element={<ReadMore facility={readAboutThisFacility} passNewFacility={passNewFacility}
                     switchButtons={switchButtons}/>}/>
-            <Route path="/trips" element={<MyTrips trips={trips} handleReadMore={handleReadMore} handleDeleteTrip={handleDeleteTrip}/>}/>
+            <Route path="/trips" element={<MyTrips trips={trips} handleReadMore={handleReadMore} handleDeleteTrip={handleDeleteTrip}
+                    updateTrip={updateTrip} updateErrors={updateErrors}/>}/>
             <Route path="/add-new-trip" element={<NewFormTrip facility={wantToAddFacilityToTrips} addNewTrip={addNewTrip}
              updateErrors={updateErrors}/>}/>
+             <Route path="/update-trip" element={<UpdateTripForm updateThisTrip={updateThisTrip} newInfoForTrip={newInfoForTrip} updateErrors={updateErrors}/>}/>
             <Route path="/" element={<Intro />} />
             <Route path="*" element={<Intro />} />
         </Routes>

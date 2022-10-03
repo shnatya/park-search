@@ -88,5 +88,5 @@ activity_facility["RECDATA"].each do |entry|
   )
   end
 end
-#FacilityCopy.destroy_all
+FacilityCopy.destroy_all
 puts "Done seeding ActivityFacility and Facility!"

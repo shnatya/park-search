@@ -100,7 +100,7 @@ function App() {
       },
       body: JSON.stringify({...newTrip, user_id: user.id})
     })
-    .then(brr => brr.json())
+    .then(res => res.json())
     .then(data => {
       if(data.errors){
         updateErrors(data.errors)

@@ -11,7 +11,8 @@
         "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
     },
     "dependencies": {
+        "@reduxjs/toolkit": "^1.8.5",
         "html-to-react": "^1.5.0",
-        "react-render-html": "^0.6.0"
+        "react-redux": "^8.0.4"
     }
 }

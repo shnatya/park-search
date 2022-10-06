@@ -1,20 +1,28 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
-const tripsSlice = createSlice({
+export const fetchTrips = createAsyncThunk("trips/fetchTrips", () => {
+    return fetch("users/trips")
+      .then((res) => res.json())
+      .then((data) => data);
+  });
+
+export const tripsSlice = createSlice({
     name: "trips",
     initialState: {
-        entities: [],
+        trips: [],
     },
     reducers: {
         tripAdded(state, action) {
-            state.entities.push({
-
-            });
-        },
-        tripRemoved(state, action) {
-            
+            state.trips.push(action.payload);
         }
-    }
+    },
+    extraReducers: {
+        // handle async actions: pending, fulfilled, rejected (for errors)
+        [fetchTrips.fulfilled](state, action) {
+          state.trips = action.payload;
+        },
+      },
 })
 
-export default { tripAdded, tripRemoved } = tripsSlice.actions
+export const { tripAdded } = tripsSlice.actions
+export default tripsSlice.reducer

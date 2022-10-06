@@ -1,7 +1,7 @@
-import { configuresStore } from "@reduxjs/toolkit"
+import { configureStore } from "@reduxjs/toolkit"
 import tripsReducer from "./Trips/tripsSlice"
 
-const store = configuresStore({
+const store = configureStore({
     reducer: {
         trips: tripsReducer,
     },

@@ -25,7 +25,7 @@ function NewFormTrip({user, facility, updateErrors}) {
     }
     function handleSubmit(event) {
         event.preventDefault()
-        //addNewTrip(newTrip)
+        addNewTrip(newTrip)
         setNewTrip({
             comment: "",
             visited_at: "",

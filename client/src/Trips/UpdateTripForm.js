@@ -24,6 +24,33 @@ function UpdateTripForm({updateThisTrip, newInfoForTrip, updateErrors}) {
         newInfoForTrip(updatedTrip)
     }
 
+    function newInfoForTrip(updatedTrip) {
+        console.log(updatedTrip)
+        fetch(`/trips/${updatedTrip.id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({...updatedTrip, user_id: user.id})
+        })
+        .then(res => res.json()
+        .then(data => {
+          if(data.errors) {
+            updateErrors(data.errors)
+            navigate('/update-trip')
+          }else { 
+            addUpdatedTripToDB(data)
+            navigate('/trips')
+          }
+        }))
+      }
+      
+      function updateTrip(trip) {
+        setUpdateThisTrip(trip)
+        console.log(trip)
+        navigate('/update-trip')
+      }
+
     return (
         <>
             <h1>Update Trip</h1>

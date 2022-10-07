@@ -14,7 +14,6 @@ function NewFormTrip({user, facility, updateErrors}) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const rateArray = [1, 2, 3, 4, 5]
-    console.log(newTrip)
 
     function handleInput(event) {
         updateErrors([])
@@ -48,7 +47,6 @@ function NewFormTrip({user, facility, updateErrors}) {
         updateErrors(data.errors)
       }else {
         dispatch(tripAdded(data))
-        //setTrips([...trips, data])
         console.log(data)
         updateErrors([`Trip has been added.`])
         navigate('/trips')

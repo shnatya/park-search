@@ -14,6 +14,10 @@ export const tripsSlice = createSlice({
     reducers: {
         tripAdded(state, action) {
             state.trips.push(action.payload);
+        },
+        tripRemoved(state, action) {
+            const index = state.trips.findIndex(trip => trip.id === action.payload)
+            state.trips.splice(index, 1)
         }
     },
     extraReducers: {
@@ -24,5 +28,5 @@ export const tripsSlice = createSlice({
       },
 })
 
-export const { tripAdded } = tripsSlice.actions
+export const { tripAdded, tripRemoved } = tripsSlice.actions
 export default tripsSlice.reducer

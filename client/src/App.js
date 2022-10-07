@@ -137,6 +137,7 @@ function App() {
                     switchButtons={switchButtons}/>}/>
             <Route path="/trips" element={<MyTrips handleReadMore={handleReadMore} updateErrors={updateErrors}/>}/>
             <Route path="/add-new-trip" element={<NewFormTrip user={user} facility={wantToAddFacilityToTrips} updateErrors={updateErrors}/>}/>
+            <Route path="/update-trip" element={<UpdateTripForm updateThisTrip={updateThisTrip} newInfoForTrip={newInfoForTrip} updateErrors={updateErrors}/>}/>
             <Route path="/" element={<Intro />} />
             <Route path="*" element={<Intro />} />
         </Routes>
@@ -190,7 +191,6 @@ export default App;
   
   function updateTrip(trip) {
     setUpdateThisTrip(trip)
-    console.log(trip)
     navigate('/update-trip')
   }*/
 

@@ -3,10 +3,11 @@ import { useDispatch } from "react-redux"
 import { tripRemoved } from "./tripsSlice"
 
 
-function TripCard({trip, handleReadMore, updateErrors}) {
+function TripCard({trip, handleReadMore, updateErrors, updateTrip}) {
+    console.log(trip)
     const review = new Array(trip.review).fill(true) 
     const dispatch = useDispatch()
-
+   
     function handleDeleteTrip() {
         fetch(`/trips/${trip.id}`, {
             method: "DELETE"})
@@ -19,12 +20,11 @@ function TripCard({trip, handleReadMore, updateErrors}) {
                     updateErrors(["Trip has been deleted."])}
                 })
     }
-
+    
     function handleUpdateTrip() {
-        updateErrors([])
         updateTrip(trip)
-    } 
-        
+        updateErrors([])
+    }
     return (
         <div className="card">
             <div className="div">

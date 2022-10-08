@@ -1,7 +1,11 @@
 import React, { useState} from "react";
+import { useNavigate } from "react-router-dom"
+import { tripUpdated } from "./tripsSlice";
+import { useDispatch } from "react-redux"
 
-function UpdateTripForm({updateThisTrip, newInfoForTrip, updateErrors}) {
-    console.log(updateThisTrip.facility)
+function UpdateTripForm({user, updateThisTrip, updateErrors}) {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [updatedTrip, setUpdatedTrip] = useState({
         comment: updateThisTrip.comment,
         visited_at: updateThisTrip.visited_at,
@@ -10,7 +14,6 @@ function UpdateTripForm({updateThisTrip, newInfoForTrip, updateErrors}) {
         id: updateThisTrip.id
     })
     const rateArray = [1, 2, 3, 4, 5]
-    console.log(updatedTrip)
 
     function handleInput(event) {
         updateErrors([])
@@ -39,16 +42,10 @@ function UpdateTripForm({updateThisTrip, newInfoForTrip, updateErrors}) {
             updateErrors(data.errors)
             navigate('/update-trip')
           }else { 
-            addUpdatedTripToDB(data)
+            dispatch(tripUpdated(data))
             navigate('/trips')
           }
         }))
-      }
-      
-      function updateTrip(trip) {
-        setUpdateThisTrip(trip)
-        console.log(trip)
-        navigate('/update-trip')
       }
 
     return (

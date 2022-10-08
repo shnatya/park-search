@@ -28,7 +28,7 @@ function App() {
   const [readAboutThisFacility, setReadAboutThisFacility] = useState({})
   const [wantToAddFacilityToTrips, setWantToAddFacilityToTrips] = useState({})
   const [switchButtons, setSwitchButtons] = useState("search")
-  //const [updateThisTrip, setUpdateThisTrip] = useState([])
+  const [updateThisTrip, setUpdateThisTrip] = useState([])
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -93,13 +93,17 @@ function App() {
     navigate("/add-new-trip")
   }
 
+  function updateTrip(trip) {
+    setUpdateThisTrip(trip)
+    navigate('/update-trip')
+  }
+
   function retrieveUser(){
       fetch("/me")
       .then(res => res.json())
       .then(user => {
         setUser(user)
         dispatch(fetchTrips())
-        //requestUserTrips()
       })
   }
 
@@ -135,9 +139,9 @@ function App() {
                     passNewFacility={passNewFacility} /> } />
             <Route path="/read-more" element={<ReadMore facility={readAboutThisFacility} passNewFacility={passNewFacility}
                     switchButtons={switchButtons}/>}/>
-            <Route path="/trips" element={<MyTrips handleReadMore={handleReadMore} updateErrors={updateErrors}/>}/>
+            <Route path="/trips" element={<MyTrips handleReadMore={handleReadMore} updateErrors={updateErrors} updateTrip={updateTrip}/>}/>
             <Route path="/add-new-trip" element={<NewFormTrip user={user} facility={wantToAddFacilityToTrips} updateErrors={updateErrors}/>}/>
-            <Route path="/update-trip" element={<UpdateTripForm updateThisTrip={updateThisTrip} newInfoForTrip={newInfoForTrip} updateErrors={updateErrors}/>}/>
+            <Route path="/update-trip" element={<UpdateTripForm user={user} updateThisTrip={updateThisTrip} updateErrors={updateErrors}/>}/>
             <Route path="/" element={<Intro />} />
             <Route path="*" element={<Intro />} />
         </Routes>

@@ -2,9 +2,10 @@ import React from "react";
 import TripCard from "./TripCard"
 import { useSelector} from "react-redux"
 
-function MyTrips({handleReadMore, updateErrors}) {
+function MyTrips({handleReadMore, updateErrors, updateTrip}) {
     const trips = useSelector((state) => state.trips.trips)
-    let arrayOfTrips = trips.map(trip => <TripCard key={trip.id} trip={trip} handleReadMore={handleReadMore} updateErrors={updateErrors}/>)
+    let arrayOfTrips = trips.map(trip => <TripCard key={trip.id} trip={trip} handleReadMore={handleReadMore}
+                                        updateErrors={updateErrors} updateTrip={updateTrip}/>)
 
     return (
         <div>

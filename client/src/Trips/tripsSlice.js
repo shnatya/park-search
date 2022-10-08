@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { current } from '@reduxjs/toolkit'
 
 export const fetchTrips = createAsyncThunk("trips/fetchTrips", () => {
     return fetch("users/trips")
@@ -13,11 +14,15 @@ export const tripsSlice = createSlice({
     },
     reducers: {
         tripAdded(state, action) {
-            state.trips.push(action.payload);
+            state.trips.push(action.payload)
         },
         tripRemoved(state, action) {
             const index = state.trips.findIndex(trip => trip.id === action.payload)
             state.trips.splice(index, 1)
+        },
+        tripUpdated(state, action) {
+            const index = state.trips.findIndex(trip => trip.id === action.payload)
+            state.trips.splice(index, 1, action.payload)
         }
     },
     extraReducers: {
@@ -28,5 +33,5 @@ export const tripsSlice = createSlice({
       },
 })
 
-export const { tripAdded, tripRemoved } = tripsSlice.actions
+export const { tripAdded, tripRemoved, tripUpdated } = tripsSlice.actions
 export default tripsSlice.reducer

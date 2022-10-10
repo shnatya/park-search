@@ -21,7 +21,7 @@ export const tripsSlice = createSlice({
             state.trips.splice(index, 1)
         },
         tripUpdated(state, action) {
-            const index = state.trips.findIndex(trip => trip.id === action.payload)
+            const index = state.trips.findIndex(trip => trip.id === action.payload.id)
             state.trips.splice(index, 1, action.payload)
         }
     },

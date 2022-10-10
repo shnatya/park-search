@@ -3,8 +3,9 @@ import { useNavigate} from "react-router-dom"
 import ErrorList from "../Errors/ErrorList";
 import { useDispatch } from "react-redux"
 import { fetchTrips } from "../Trips/tripsSlice"
+import { userLogin } from "./usersSlice";
 
-function Signup({onLogin}) {
+function Signup() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [passwordConfirmation, setPasswordConfirmation] = useState("")
@@ -28,7 +29,7 @@ function Signup({onLogin}) {
         .then(res => {
             if(res.ok){
                 res.json().then(user => {
-                    onLogin(user)
+                    dispatch(userLogin(user))
                     dispatch(fetchTrips())
                     navigate("/search")
                 })

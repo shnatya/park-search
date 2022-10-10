@@ -2,8 +2,9 @@ import './App.css';
 
 import { useState, useEffect } from "react";
 import { Route, Routes, useNavigate} from 'react-router-dom'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchTrips } from "./Trips/tripsSlice" 
+import { userLogin, userLogout } from "./Log/usersSlice" 
 import Login from './Log/Login';
 import Signup from './Log/Signup'
 import Intro from './Intro';
@@ -13,11 +14,11 @@ import ReadMore from './Facilities/ReadMore';
 import MyTrips from './Trips/MyTrips';
 import NewFormTrip from './Trips/NewFormTrip';
 import UpdateTripForm from './Trips/UpdateTripForm';
-import { tripAdded } from './Trips/tripsSlice';
+import { current } from '@reduxjs/toolkit';
 
 
 function App() {
-  const [user, setUser] = useState(null)
+  //const [user, setUser] = useState(null)
   //const [trips, setTrips] = useState([])
   const [errors, setErrors] = useState([])
   const [activities, setActivities] = useState([])
@@ -32,7 +33,7 @@ function App() {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  
+  const user = useSelector((state) => state.user.user)
   
   function updateErrors(newErrors) {
     setErrors(newErrors)
@@ -102,17 +103,13 @@ function App() {
       fetch("/me")
       .then(res => res.json())
       .then(user => {
-        setUser(user)
+        dispatch(userLogin(user))
         dispatch(fetchTrips())
       })
   }
 
-  function onLogin(user) {
-    setUser(user)
-  }
-
   function resetUser(){
-    setUser(null)
+    dispatch(userLogout())
     updateErrors([])
     setChosenActivity("")
     setFacilitiesToDisplay([])
@@ -121,7 +118,7 @@ function App() {
   function loadHeader() {
     return (
     <div>
-        <Header user={user} resetUser={resetUser}  errors={errors} updateErrors={updateErrors} handleSwitchButtons={handleSwitchButtons}/>
+        <Header resetUser={resetUser}  errors={errors} updateErrors={updateErrors} handleSwitchButtons={handleSwitchButtons}/>
     </div>
     )
   }
@@ -132,16 +129,16 @@ function App() {
       {(user === null || user.id === undefined) ? null : loadHeader()}
       <div className="App">
         <Routes>
-            <Route path="/login" element={<Login onLogin={onLogin}/>} />
-            <Route path="/signup" element={<Signup onLogin={onLogin}/>} />
+            <Route path="/login" element={<Login loadHeader={loadHeader}/>} />
+            <Route path="/signup" element={<Signup />} />
             <Route path="/search" element={<Search activities={activities} filterFacilitiesBy={filterFacilitiesBy}
                    facilitiesToDisplay={facilitiesToDisplay} chosenActivity={chosenActivity} handleReadMore={handleReadMore}
                     passNewFacility={passNewFacility} /> } />
             <Route path="/read-more" element={<ReadMore facility={readAboutThisFacility} passNewFacility={passNewFacility}
                     switchButtons={switchButtons}/>}/>
             <Route path="/trips" element={<MyTrips handleReadMore={handleReadMore} updateErrors={updateErrors} updateTrip={updateTrip}/>}/>
-            <Route path="/add-new-trip" element={<NewFormTrip user={user} facility={wantToAddFacilityToTrips} updateErrors={updateErrors}/>}/>
-            <Route path="/update-trip" element={<UpdateTripForm user={user} updateThisTrip={updateThisTrip} updateErrors={updateErrors}/>}/>
+            <Route path="/add-new-trip" element={<NewFormTrip facility={wantToAddFacilityToTrips} updateErrors={updateErrors}/>}/>
+            <Route path="/update-trip" element={<UpdateTripForm updateThisTrip={updateThisTrip} updateErrors={updateErrors}/>}/>
             <Route path="/" element={<Intro />} />
             <Route path="*" element={<Intro />} />
         </Routes>

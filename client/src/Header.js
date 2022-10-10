@@ -1,11 +1,12 @@
 import React from "react";
 import ErrorList from "./Errors/ErrorList";
 import { useNavigate} from "react-router-dom"
+import { useSelector } from "react-redux"
 
-function Header({user, resetUser, errors, updateErrors, handleSwitchButtons}) {
+function Header({resetUser, errors, updateErrors, handleSwitchButtons}) {
     const navigate = useNavigate()
-    //console.log(user.username)
-
+    const user = useSelector((state) => state.user.user)
+    
     function handleLogout() {
         fetch(("/logout"), { method: "DELETE"})
         .then(res => {

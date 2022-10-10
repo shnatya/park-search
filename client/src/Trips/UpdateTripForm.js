@@ -1,11 +1,12 @@
 import React, { useState} from "react";
 import { useNavigate } from "react-router-dom"
 import { tripUpdated } from "./tripsSlice";
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
-function UpdateTripForm({user, updateThisTrip, updateErrors}) {
+function UpdateTripForm({updateThisTrip, updateErrors}) {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const user = useSelector((state) => state.user.user)
     const [updatedTrip, setUpdatedTrip] = useState({
         comment: updateThisTrip.comment,
         visited_at: updateThisTrip.visited_at,
@@ -42,6 +43,7 @@ function UpdateTripForm({user, updateThisTrip, updateErrors}) {
             updateErrors(data.errors)
             navigate('/update-trip')
           }else { 
+            console.log(data)
             dispatch(tripUpdated(data))
             navigate('/trips')
           }

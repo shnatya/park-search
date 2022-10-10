@@ -1,10 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { tripAdded } from "./tripsSlice"
 import { useNavigate} from "react-router-dom"
 
-function NewFormTrip({user, facility, updateErrors}) {
+function NewFormTrip({facility, updateErrors}) {
     const [newTrip, setNewTrip] = useState({
         comment: "",
         visited_at: "",
@@ -12,6 +12,7 @@ function NewFormTrip({user, facility, updateErrors}) {
         facility_id: facility.id
     })
     const dispatch = useDispatch()
+    const user = useSelector((state) => state.user.user)
     const navigate = useNavigate()
     const rateArray = [1, 2, 3, 4, 5]
 

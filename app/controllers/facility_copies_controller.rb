@@ -1,2 +1,0 @@
-class FacilityCopiesController < ApplicationController
-end

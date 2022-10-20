@@ -4,10 +4,9 @@ import { tripRemoved } from "./tripsSlice"
 
 
 function TripCard({trip, handleReadMore, updateErrors, updateTrip}) {
-    console.log(trip)
     const review = new Array(trip.review).fill(true) 
     const dispatch = useDispatch()
-   
+
     function handleDeleteTrip() {
         fetch(`/trips/${trip.id}`, {
             method: "DELETE"})
@@ -25,15 +24,20 @@ function TripCard({trip, handleReadMore, updateErrors, updateTrip}) {
         updateTrip(trip)
         updateErrors([])
     }
+    function handleClick() {
+        handleReadMore(trip.facility)
+        updateErrors([])
+    }
     return (
         <div className="card">
             <div className="div">
                 <button type="button" onClick={() => handleDeleteTrip()} className="delete-button">X</button>
             </div>
             <div>
+            
                 {review.map((item, index) => <span key={index}>&#127775;</span>)}
             </div>
-            <button onClick={() => handleReadMore(trip.facility)} className="invisible-button">{trip.facility.name}</button> 
+            <button onClick={() => handleClick()} className="invisible-button">{trip.facility.name}</button> 
             <h5>{trip.visited_at}</h5>
             <div className="div">
                 <h3 className="between-text">My comment: </h3> 

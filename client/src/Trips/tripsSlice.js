@@ -26,7 +26,7 @@ export const tripsSlice = createSlice({
         }
     },
     extraReducers: {
-        // handle async actions: pending, fulfilled, rejected (for errors)
+        // handle async actions
         [fetchTrips.fulfilled](state, action) {
           state.trips = action.payload;
         },

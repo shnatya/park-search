@@ -1,10 +1,8 @@
 import React, { useState } from "react"
 import Facilities from './Facilities/Facilities'
-import { useNavigate } from "react-router-dom"
 
 function Search({activities, chosenActivity, filterFacilitiesBy, facilitiesToDisplay,
                 switchButtons, handleReadMore, passNewFacility}) {
-    const navigate = useNavigate()
     
     function handleFilter(event){
         filterFacilitiesBy(event.target.value)

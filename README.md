@@ -18,7 +18,7 @@ To start the server, type in your terminal:
 ### `$ rails s`
  
 This will run your server on port
-[http://localhost:3001](http://localhost:3001).
+[http://localhost:3000](http://localhost:3000).
 
 To start working with database in your terminal:
 ### `$ rails c`
@@ -27,7 +27,7 @@ To run the app in the development mode:
 ### `$ npm start --prefix client`
 
 It will run on port 3000:
-[http://localhost:3000](http://localhost:3000) 
+[http://localhost:4000](http://localhost:4000) 
 
 ## APIKey
 To work with the app, you have to get APIKey at https://ridb.recreation.gov/landing. After signing up, you will find their free APIKey in your profile. Copy the APIKey and go to db/seeds.rb in the app. There find next two lines and paste in your APIKEY:

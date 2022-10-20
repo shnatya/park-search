@@ -29,7 +29,6 @@ function UpdateTripForm({updateThisTrip, updateErrors}) {
     }
 
     function newInfoForTrip(updatedTrip) {
-        console.log(updatedTrip)
         fetch(`/trips/${updatedTrip.id}`, {
           method: "PATCH",
           headers: {
@@ -43,7 +42,6 @@ function UpdateTripForm({updateThisTrip, updateErrors}) {
             updateErrors(data.errors)
             navigate('/update-trip')
           }else { 
-            console.log(data)
             dispatch(tripUpdated(data))
             navigate('/trips')
           }

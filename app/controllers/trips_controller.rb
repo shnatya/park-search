@@ -27,8 +27,12 @@ class TripsController < ApplicationController
 
     #DELETE "/trips/:id"
     def destroy
-        @trip.destroy
-        render json: @trip
+        if @trip[:user_id] == session[:user_id]
+            @trip.destroy
+            render json: @trip
+        else
+            render json: {errors: ["Not authorized to update this trip!"]}, status: :unauthorized
+        end
     end
 
     private 

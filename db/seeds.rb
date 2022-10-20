@@ -9,10 +9,7 @@ offset = 0
 max_records = 200
 cur_records = 0
 while (true) do
-# make a request to the endpoint:
-response = RestClient.get "https://ridb.recreation.gov/api/v1/facilities?limit=#{limit}&offset=#{offset}", headers={apikey: '39051e7d-45e8-4b59-b80f-4f6511c2fbe6'} 
-  # the response will come back as a JSON-formatted string.
-  # using JSON.parse to convert this string to a Ruby hash:
+  response = RestClient.get "https://ridb.recreation.gov/api/v1/facilities?limit=#{limit}&offset=#{offset}", headers={apikey: '39051e7d-45e8-4b59-b80f-4f6511c2fbe6'} 
   tmp_hash = JSON.parse(response)
   facility_copy += tmp_hash["RECDATA"]
 
@@ -22,7 +19,6 @@ response = RestClient.get "https://ridb.recreation.gov/api/v1/facilities?limit=#
 
   offset += limit
   cur_records += limit
-
 end
 
 facility_copy.each do |facility|
@@ -59,7 +55,8 @@ activity_facility = JSON.parse(File.read('db/ribd/EntityActivities_API_v1.json')
 activity_facility["RECDATA"].each do |entry|
   activity = Activity.find_by_activity_code(entry["ActivityID"])
   primary_activity_id = activity.id
- 
+
+  #facility_copy has some facilities which are without activities. I don't need these facilities in my Facilities table.
   facility_copy = FacilityCopy.find_by_facility_code(entry["EntityID"])
   if facility_copy
     #need to check if this facility code is already in the table, because activity_facility
@@ -84,3 +81,17 @@ activity_facility["RECDATA"].each do |entry|
 end
 FacilityCopy.destroy_all
 puts "Done seeding ActivityFacility and Facility!"
+
+activity_facility["RECDATA"].each do |entry|
+  activity = Activity.find_by_activity_code(entry["ActivityID"])
+  primary_activity_id = activity.id
+
+  facility = Facility.find_by_facility_code(entry["EntityID"])
+  primary_facility_id = facility.id
+
+  ActivityFacility.create(
+    facility_id: primary_facility_id,
+    activity_id: primary_activity_id
+  )
+  end
+end

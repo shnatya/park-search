@@ -3,7 +3,6 @@ class FacilitiesController < ApplicationController
     def index 
         facilities = Facility.all
         render json: facilities, methods: [:short_description, :all_activities]
-        
     end
 end
 #
